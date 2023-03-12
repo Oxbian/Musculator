@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MUSCULATOR WEBSITE">
+    <title>SIGN IN | MUSCULATOR</title>
+    <link href="assets/style/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/style/signin.css" rel="stylesheet">
+    <script src="assets/scripts/signin.js" defer></script>
+</head>
+<body class="text-center">
+    <main class="form-signin w-100 m-auto">
+      <img class="mb-4" src="assets/pictures/logo.png" alt="MUSCULATOR logo" width="200vw" height="auto">
+  
+      <!-- Sign in form -->
+      <form>
+        <div class="form-floating">
+          <input type="email" class="form-control" id="floatingInput" placeholder="example@protonmail.com">
+          <label for="floatingInput">Email</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="floatingPassword" placeholder="Password!">
+          <label for="floatingPassword">Password</label>
+        </div>
+        <p id="error" class="text-muted text-danger"></p>
+  
+        <div class="checkbox mb-3 text-white">
+          <label>
+            <input id="checkboxe" type="checkbox" value="show-me"> Show password
+          </label>
+        </div>
+      </form>
+  
+      <a class="w-100 btn btn-lg btn-primary" id ="signin" aria-disabled="true" role="button" data-bs-toggle="button" href="assets/pages/home.html">SIGN IN</a>
+      <a class="mt-1 w-100 btn btn-lg btn-outline-secondary" id="register" role="button" data-bs-toggle="button" href="assets/pages/register.html">REGISTER</a>
+      <p class="mt-5 mb-3 text-white">&copy; 2038-2042</p>
+    </main>
+  </body>
+  </html>

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="MUSCULATOR WEBSITE">
+  <title>REGISTER | MUSCULATOR</title>
+  <link href="../style/bootstrap.min.css" rel="stylesheet">
+  <link href="../style/register.css" rel="stylesheet">
+  <script src="../scripts/register.js" defer></script>
+</head>
+
+<body class="text-center">
+  <main class="form-register w-100 m-auto">
+    <img class="mb-4" src="../pictures/logo.png" alt="MUSCULATOR logo" width="200vw" height="auto">
+
+    <!-- Register form -->
+    <form>
+      <div class="form-floating">
+        <input type="email" class="form-control" id="floatingInput" placeholder="example@protonmail.com">
+        <label for="floatingInput">Email</label>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password!">
+        <label for="floatingPassword">Password</label>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPasswordConfirmation" placeholder="Password!">
+        <label for="floatingPassword">Password Confirmation</label>
+      </div>
+
+      <p id="error" class="text-muted text-danger"></p>
+
+      <div class="checkbox mb-3 text-white">
+        <label>
+          <input id="checkboxe" type="checkbox" value="show-me"> Show password
+        </label>
+      </div>
+    </form>
+
+    <a class="w-100 btn btn-lg btn-primary" id ="register" aria-disabled="true" role="button" data-bs-toggle="button" href="../../signin.html">REGISTER</a>
+    <a class="mt-1 w-100 btn btn-lg btn-outline-secondary" id="signin" role="button" data-bs-toggle="button" href="../../signin.html">SIGN IN</a>
+    <p class="mt-5 mb-3 text-white">&copy; 2038-2042</p>
+  </main>
+</body>
+</html>
