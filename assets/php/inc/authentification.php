@@ -1,6 +1,6 @@
 <?php
 
-require_once('inc/database.php');
+require_once('database.php');
 
 function authentification($db)
 {

@@ -8,9 +8,7 @@ function sendJsonData($data, $code)
 {
     if ($code == 200) {
         header('HTTP/1.1 200 OK');
-        if ($data != array() && $data != false && $data != true) { 
-            echo json_encode($data); 
-        }
+        echo json_encode($data); 
     } else if ($code == 201) {
         header('HTTP/1.1 201 CREATED');
     }

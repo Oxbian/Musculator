@@ -1,9 +1,9 @@
 <?php
 
-require_once('inc/database.php'); // All the database functions
+require_once('database.php'); // All the database functions
 require_once('inc/authentification.php'); // All the token functions
 require_once('inc/data_encode.php'); // All the data & error functions
-require_once('inc/debug.php'); // Debug functions
+//require_once('inc/debug.php'); // Debug functions
 
 $db = dbConnect();
 
@@ -16,20 +16,24 @@ $request = substr($_SERVER['PATH_INFO'], 1);
 $request = explode('/', $request);
 $requestRessource = array_shift($request);
 
-if ($requestRessource = 'authentification') {
+if ($requestRessource == 'authentification') {
     authentification($db);
-} else if ($requestRessource = 'verifyToken') {
+} else if ($requestRessource == 'verifyToken') {
     verifyToken($db);
 }
 
-if ($requestRessource = 'program') {
+$login = 'test'; // TEMPORARY
+
+//echo $requestRessource; // DEBUG
+
+if ($requestRessource == 'program') {
     switch ($requestMethod) {
         case 'GET':
             if ($login != NULL) {
                 $id = array_shift($request);
-                if ($id = '')
+                if ($id == '')
                     $id = NULL;
-
+                
                 if ($id != NULL) {
                     // Get the program of the specified id
                     $data = dbRequestProgram($db, $id, $login);
@@ -73,7 +77,7 @@ if ($requestRessource = 'program') {
         case 'PUT':
             if ($login != NULL) {
                 $id = array_shift($request);
-                if ($id = '')
+                if ($id == '')
                     $id = NULL;
         
                 if ($id != NULL) {
@@ -100,7 +104,7 @@ if ($requestRessource = 'program') {
         case 'DELETE':
             if ($login != NULL) {
                 $id = array_shift($request);
-                if ($id = '')
+                if ($id == '')
                     $id = NULL;
         
                 if ($id != NULL) {
@@ -125,12 +129,12 @@ if ($requestRessource = 'program') {
     }
 }
 
-if ($requestRessource = 'exercise') {
+if ($requestRessource == 'exercise') {
     switch ($requestMethod) {
         case 'GET':
             if ($login != NULL) {
                 $id = array_shift($request);
-                if ($id = '')
+                if ($id == '')
                     $id = NULL;
 
                 if ($id != NULL) {
@@ -182,7 +186,7 @@ if ($requestRessource = 'exercise') {
         case 'PUT':
             if ($login != NULL) {
                 $id = array_shift($request);
-                if ($id = '')
+                if ($id == '')
                     $id = NULL;
         
                 if ($id != NULL) {
@@ -215,7 +219,7 @@ if ($requestRessource = 'exercise') {
         case 'DELETE':
             if ($login != NULL) {
                 $id = array_shift($request);
-                if ($id = '')
+                if ($id == '')
                     $id = NULL;
         
                 if ($id != NULL) {
@@ -240,12 +244,12 @@ if ($requestRessource = 'exercise') {
     }
 }
 
-if ($requestRessource = 'session') {
+if ($requestRessource == 'session') {
     switch ($requestMethod) {
         case 'GET':
             if ($login != NULL) {
                 $id = array_shift($request);
-                if ($id = '')
+                if ($id == '')
                     $id = NULL;
 
                 if ($id != NULL) {
@@ -297,7 +301,7 @@ if ($requestRessource = 'session') {
         case 'PUT':
             if ($login != NULL) {
                 $id = array_shift($request);
-                if ($id = '')
+                if ($id == '')
                     $id = NULL;
         
                 if ($id != NULL) {
@@ -329,7 +333,7 @@ if ($requestRessource = 'session') {
         case 'DELETE':
             if ($login != NULL) {
                 $id = array_shift($request);
-                if ($id = '')
+                if ($id == '')
                     $id = NULL;
         
                 if ($id != NULL) {
