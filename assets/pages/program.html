@@ -7,8 +7,16 @@
     <title>PROGRAM | MUSCULATOR</title>
 
     <!-- Style -->
-    <link href="../style/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" crossorigin="anonymous">
     <link href="../style/home.css" rel="stylesheet">
+
+    <!-- Script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js" defer></script>
+    <script src="../js/ajax.js"></script>
+    <script src="../js/program.js" defer></script>
+
 </head>
 
 <body class="bg-dark">
@@ -26,7 +34,6 @@
                 <div class="navbar-nav">
                     <a class="nav-link" href="home.html">Home</a>
                     <a class="nav-link active" aria-current="page" href="program.html">Program</a>
-                    <a class="nav-link" href="exercise.html">Exercise</a>
                 </div>
             </div>
         </div>
@@ -34,7 +41,194 @@
 
     <!-- Main -->
     <main>
-        <!-- TODO: Add program content & creation form -->
+        <!-- Errors -->
+        <section id="errors" class="mt-3 container alert alert-danger" style="display: none">
+        </section>
+
+        <!-- Add program content & creation form -->
+        <section class="container">
+            <div class="row h-100">
+                <div class="col-8" id="program-list">
+                    <div class="mt-3 bg-light border rounded text-center">
+                        <h1>My Super Progr4M</h1>
+                        <div class="d-flex justify-content-between">
+                            <div class="justify-content-evenly">
+                                <button type="button" class="btn btn-secondary" id="editProgram" value="1"><i class="bi bi-pencil-square"></i></button>
+                                <button type="button" class="btn btn-danger" id="deleteProgram" value="1"><i class="bi bi-trash"></i></button>
+                            </div>
+                            <button type="button" class="btn btn-primary me-3"><i class="bi bi-plus-square"></i> Add exercise</button>
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Exercise name</th>
+                                    <th scope="col">Serie</th>
+                                    <th scope="col">Repetition</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Edit</th>
+                                    <th scope="col">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody id="program1-list">
+                                <tr>
+                                    <td scope="row">Exercise 1</td>
+                                    <td>3</td>
+                                    <td>10</td>
+                                    <td>description</td>
+                                    <td><button type="button" class="btn btn-secondary"><i class="bi bi-pencil-square"></i></button></td>
+                                    <td><button type="button" class="btn btn-danger"><i class="bi bi-x-square"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- TODO: Add a modal for delete confirmation, exercise adding & program deletion-->
+                <div class="col-4 mt-3">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProgramBackdrop">Add program</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal for all the system -->
+        <section>
+            <!-- Modal for program creation -->
+            <div class="modal fade" id="addProgramBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addProgramBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="addProgramBackdropLabel">Add a program</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="AddProgramName" class="col-form-label">Program name:</label>
+                                    <input type="text" class="form-control" id="AddProgramName">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="AddProgramBtn">Create</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Modal for program update -->
+            <div class="modal fade" id="updateProgramBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="updateProgramBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="updateProgramBackdropLabel">Update a program</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="UpdateProgramName" class="col-form-label">Program name:</label>
+                                    <input type="text" class="form-control" id="UpdateProgramName" value="test">
+                                    <input type="text" id="UpdateProgramId" style="display: none" value="1">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="UpdateProgramBtn">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal for program delete -->
+            <div class="modal fade" id="deleteProgramBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteProgramBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="deleteProgramBackdropLabel">Delete a program</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="text" id="DeleteProgramId" style="display: none" value="1">
+                            <p id="DeleteProgramText">Do you really want to delete Program : ...</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No</button>
+                            <button type="button" class="btn btn-danger" id="DeleteProgramBtn">Yes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal for Exercise creation -->
+            <div class="modal fade" id="addExerciseBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addExerciseBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="addExerciseBackdropLabel">Add a Exercise</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="AddExerciseName" class="col-form-label">Exercise name:</label>
+                                    <input type="text" class="form-control" id="AddExerciseName">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="AddExerciseBtn">Create</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Modal for Exercise update -->
+            <div class="modal fade" id="updateExerciseBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="updateExerciseBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="updateExerciseBackdropLabel">Update a Exercise</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="UpdateExerciseName" class="col-form-label">Exercise name:</label>
+                                    <input type="text" class="form-control" id="UpdateExerciseName" value="test">
+                                    <input type="text" id="UpdateExerciseId" style="display: none" value="1">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="UpdateExerciseBtn">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal for Exercise delete -->
+            <div class="modal fade" id="deleteExerciseBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteExerciseBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="deleteExerciseBackdropLabel">Delete a Exercise</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="text" id="DeleteExerciseId" style="display: none" value="1">
+                            <p id="DeleteExerciseText">Do you really want to delete Exercise : ...</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No</button>
+                            <button type="button" class="btn btn-danger" id="DeleteExerciseBtn">Yes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 </body>
 </html>
