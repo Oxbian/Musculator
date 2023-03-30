@@ -85,10 +85,6 @@
 			error_log('Request error: ' . $exception->getMessage());
 			return false;
 		}
-
-		if (!$result) {
-			return false;
-		}
 		return $result;
 	}
 
@@ -104,10 +100,6 @@
 			$result = $statement->fetch();
 		} catch (PDOException $exception) {
 			error_log('Request error: ' . $exception->getMessage());
-			return false;
-		}
-
-		if (!$result) {
 			return false;
 		}
 		return $result;
@@ -153,6 +145,8 @@
 		$login = sanitize_string($login);
 
 		try {
+			dbDeleteAllSessionProgram($db, $id, $login);
+			dbDeleteAllExerciseProgram($db, $id, $login);
 			$statement = $db->prepare('DELETE FROM program WHERE id = :id AND login = :login');
 			$statement->execute(array('id' => $id, 'login' => $login));
 		} catch (PDOException $exception) {
@@ -176,10 +170,6 @@
 			error_log('Request error: ' . $exception->getMessage());
 			return false;
 		}
-		
-		if (!$result) {
-			return false;
-		}
 		return $result;
 	}
 
@@ -195,10 +185,6 @@
 			$result = $statement->fetch();
 		} catch (PDOException $exception) {
 			error_log('Request error: ' . $exception->getMessage());
-			return false;
-		}
-
-		if (!$result) {
 			return false;
 		}
 		return $result;
@@ -256,8 +242,25 @@
 		$login = sanitize_string($login);
 
 		try {
+			dbDeleteAllSessionExercise($db, $id, $login);
 			$statement = $db->prepare('DELETE FROM exercise WHERE id = :id AND login = :login');
 			$statement->execute(array('id' => $id, 'login' => $login));
+		} catch (PDOException $exception) {
+			error_log('Request error: ' . $exception->getMessage());
+			return false;
+		}
+		return true;
+	}
+
+	// Delete all the exercise of a certain program id
+	function dbDeleteAllExerciseProgram($db, $id_program, $login)
+	{
+		$id_program = sanitize_strint($id_program);
+		$login = sanitize_string($login);
+
+		try {
+			$statement = $db->prepare('DELETE FROM exercise WHERE id_program = :id AND login = :login');
+			$statement->execute(array('id' => $id_program, 'login' => $login));
 		} catch (PDOException $exception) {
 			error_log('Request error: ' . $exception->getMessage());
 			return false;
@@ -279,10 +282,6 @@
 			error_log('Request error: ' . $exception->getMessage());
 			return false;
 		}
-
-		if (!$result) {
-			return false;
-		}
 		return $result;
 	}
 
@@ -298,10 +297,6 @@
 			$result = $statement->fetch();
 		} catch (PDOException $exception) {
 			error_log('Request error: ' . $exception->getMessage());
-			return false;
-		}
-
-		if (!$result) {
 			return false;
 		}
 		return $result;
@@ -359,6 +354,38 @@
 		try {
 			$statement = $db->prepare('DELETE FROM session WHERE id = :id AND login = :login');
 			$statement->execute(array('id' => $id, 'login' => $login));
+		} catch (PDOException $exception) {
+			error_log('Request error: ' . $exception->getMessage());
+			return false;
+		}
+		return true;
+	}
+
+	// Delete all the session of a certain exercise id
+	function dbDeleteAllSessionExercise($db, $id_exercise, $login)
+	{
+		$id_exercise = sanitize_strint($id_exercise);
+		$login = sanitize_string($login);
+
+		try {
+			$statement = $db->prepare('DELETE FROM session WHERE id_exercise = :id AND login = :login');
+			$statement->execute(array('id' => $id_exercise, 'login' => $login));
+		} catch (PDOException $exception) {
+			error_log('Request error: ' . $exception->getMessage());
+			return false;
+		}
+		return true;
+	}
+
+	// Delete all the session of a certain program id
+	function dbDeleteAllSessionProgram($db, $id_program, $login)
+	{
+		$id_program = sanitize_strint($id_program);
+		$login = sanitize_string($login);
+
+		try {
+			$statement = $db->prepare('DELETE FROM session WHERE id_exercise IN (SELECT id FROM exercise WHERE id_program = :id) AND login = :login');
+			$statement->execute(array('id' => $id_program, 'login' => $login));
 		} catch (PDOException $exception) {
 			error_log('Request error: ' . $exception->getMessage());
 			return false;

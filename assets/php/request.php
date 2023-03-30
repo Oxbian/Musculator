@@ -3,7 +3,7 @@
 require_once('database.php'); // All the database functions
 require_once('inc/authentification.php'); // All the token functions
 require_once('inc/data_encode.php'); // All the data & error functions
-//require_once('inc/debug.php'); // Debug functions
+require_once('inc/debug.php'); // Debug functions
 
 $db = dbConnect();
 
@@ -37,19 +37,11 @@ if ($requestRessource == 'program') {
                 if ($id != NULL) {
                     // Get the program of the specified id
                     $data = dbRequestProgram($db, $id, $login);
-                    if ($data != NULL) {
-                        sendJsonData($data, 200);
-                    } else {
-                        sendError(404);
-                    }
+                    sendJsonData($data, 200);
                 } else {
                     // Get all the programs of the user
                     $data = dbRequestPrograms($db, $login);
-                    if ($data != NULL) {
-                        sendJsonData($data, 200);
-                    } else {
-                        sendError(404);
-                    }
+                    sendJsonData($data, 200);
                 }
             } else {
                 sendError(401);
@@ -84,7 +76,7 @@ if ($requestRessource == 'program') {
                     parse_str(file_get_contents("php://input"), $_PUT);
                     if (isset($_PUT['name']) && empty($_PUT['name']) == false) {
                         // Modify the program of the specified id
-                        $data = dbModifyProgram($db, $id, $_POST['name'], $login);
+                        $data = dbModifyProgram($db, $_PUT['name'], $id, $login);
                         if ($data == false) {
                             sendError(400);
                         } else {
@@ -140,20 +132,12 @@ if ($requestRessource == 'exercise') {
                 if ($id != NULL) {
                     // Get the specified exercise
                     $data = dbRequestExercise($db, $id, $login);
-                    if ($data != NULL) {
-                        sendJsonData($data, 200);
-                    } else {
-                        sendError(404);
-                    }
+                    sendJsonData($data, 200);
                 } else {
                     // Get all the exercise of a program
                     if (isset($_GET['id_program'])) {
                         $data = dbRequestExercises($db, $_GET['id_program'], $login);
-                        if ($data != NULL) {
-                            sendJsonData($data, 200);
-                        } else {
-                            sendError(404);
-                        }
+                        sendJsonData($data, 200);
                     } else {
                         sendError(400);
                     }
@@ -255,20 +239,12 @@ if ($requestRessource == 'session') {
                 if ($id != NULL) {
                     // Get the specified session
                     $data = dbRequestSession($db, $id, $login);
-                    if ($data != NULL) {
-                        sendJsonData($data, 200);
-                    } else {
-                        sendError(404);
-                    }
+                    sendJsonData($data, 200);
                 } else {
                     // Get all the sessions of an exercise
                     if (isset($_GET['id_exercise'])) {
                         $data = dbRequestSession($db, $_GET['id_exercise'], $login);
-                        if ($data != NULL) {
-                            sendJsonData($data, 200);
-                        } else {
-                            sendError(404);
-                        }
+                        sendJsonData($data, 200);
                     } else {
                         sendError(400);
                     }

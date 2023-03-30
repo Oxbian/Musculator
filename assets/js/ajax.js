@@ -17,7 +17,8 @@ function ajaxRequest(type, url, callback, data = null)
             case 200:
             case 201:
                 console.log(xhr.responseText);
-                callback(JSON.parse(xhr.responseText));
+                if (xhr.responseText != '[]')
+                    callback(JSON.parse(xhr.responseText));
                 break;
 
             default:
@@ -25,9 +26,8 @@ function ajaxRequest(type, url, callback, data = null)
                 break;
         }
     };
-
     // Send the XML HTTP Request
-    xhr.send();
+    xhr.send(data);
 }
 
 // Display an error message accordingly to an error code

@@ -3,11 +3,14 @@
 // Generate the program list
 function showPrograms(data)
 {
+    if (data.length == 0 || data == null || data == false)
+        return;
+
     $('#program-list').html(''); // clear the list
 
     // Append each program to the list
     data.forEach(element => {
-        $('#program-list').append('<div class="mt-3 bg-light border rounded text-center"><h1>' + element.name + 
+        $('#program-list').append('<div class="mt-3 bg-light border rounded text-center" value="' + element.id + '"><h1>' + element.name + 
         '</h1><div class="d-flex justify-content-between"><div class="justify-content-evenly"><button type="button" class="btn'
         + ' btn-secondary" data-bs-toggle="modal" data-bs-target="#universalModal" data-bs-whatever="editProgram" value="' + element.id +
         '"><i class="bi bi-pencil-square"></i></button><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#universalModal"' +
@@ -22,6 +25,9 @@ function showPrograms(data)
 
 function showExercises(data)
 {
+    if (data.length == 0 || data == null || data == false)
+        return;
+
     // Append each exercise to it's program
     data.forEach(element => {
         $('#program'+element.id_program+'-list').append('<tr><td scope="row">' + element.name + '</td><td>' + element.serie + '</td><td>' + 
