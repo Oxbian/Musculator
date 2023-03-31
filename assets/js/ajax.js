@@ -17,7 +17,7 @@ function ajaxRequest(type, url, callback, data = null)
             case 200:
             case 201:
                 console.log(xhr.responseText);
-                if (xhr.responseText != '[]')
+                if (xhr.responseText)
                     callback(JSON.parse(xhr.responseText));
                 break;
 
