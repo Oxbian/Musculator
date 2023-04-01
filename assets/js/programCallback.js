@@ -17,6 +17,7 @@ function showPrograms(data)
         '<th scope="col">Serie</th><th scope="col">Repetition</th><th scope="col">Description</th><th scope="col">Edit</th><th scope="col">Delete</th></tr></thead><tbody id="program'
         + element.id + '-list"></tbody></table></div>');
         ajaxRequest('GET', '../php/request.php/exercise', showExercises, 'id_program=' + element.id);
+        $('#program'+element.id+'-list').html(''); // Clear the exercise list
     });
 }
 
@@ -27,8 +28,8 @@ function showExercises(data)
 
     // Append each exercise to it's program
     data.forEach(element => {
-        $('#program'+element.id_program+'-list').append('<tr><td scope="row" class="exerciseName">' + element.name + '</td><td class="exerciseSerie">' + element.serie + '</td><td class="exerciseRep">' + 
-        element.repetition + '</td><td class="exerciseDescription">' + element.description + '</td><td><button type="button" class="btn btn-secondary editExercise" value="' + element.id 
+        $('#program'+element.id_program+'-list').append('<tr><td scope="row">' + element.name + '</td><td>' + element.serie + '</td><td>' + 
+        element.repetition + '</td><td>' + element.description + '</td><td><button type="button" class="btn btn-secondary editExercise" value="' + element.id 
         + '"><i class="bi bi-pencil-square"></i></button></td><td><button type="button" class="btn btn-danger deleteExercise" value="' + element.id 
         + '"><i class="bi bi-trash"></i></button></td></tr>');
     });

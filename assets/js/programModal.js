@@ -37,7 +37,7 @@ $('#program-list').on('click', '.addExercise', () => {
     '<input type="text" class="form-control" id="AddExerciseName"><label for="AddExerciseSerie" class="col-form-label">Exercise serie:</label>'+
     '<input type="number" class="form-control" id="AddExerciseSerie"><label for="AddExerciseRepetition" class="col-form-label">Exercise repetition:</label>'+
     '<input type="number" class="form-control" id="AddExerciseRepetition"><label for="AddExerciseDescription" class="col-form-label">Exercise description:</label>' +
-    '<textarea name="AddExerciseDescription" rows="10" cols="45"></textarea><input type="hidden" id="AddExerciseProgramId" value="' + $(event.target).closest('.program').data('value')
+    '<textarea id="AddExerciseDescription" rows="10" cols="45"></textarea><input type="hidden" id="AddExerciseProgramId" value="' + $(event.target).closest('.program').data('value')
     + '"></div></form>');
     $('#universalModalNo').text('Cancel');
     $('#universalModalYes').text('Add');
@@ -46,13 +46,12 @@ $('#program-list').on('click', '.addExercise', () => {
 });
 
 $('#program-list').on('click', '.editExercise', () => {
-    console.log($(event.target).closest('.exerciseName'));
     $('#universalModalTitle').text('Update an exercise');
     $('#universalModalBody').html('<form><div class="mb-3"><label for="UpdateExerciseName" class="col-form-label">Exercise name:</label>'+
-    '<input type="text" class="form-control" id="UpdateExerciseName" value="'+ $(event.target).closest('.exerciseName').text() + '"><label for="UpdateExerciseSerie" class="col-form-label">Exercise serie:</label>'+
-    '<input type="number" class="form-control" id="UpdateExerciseSerie" value="' + $(event.target).closest('.exerciseSerie').text() + '"><label for="UpdateExerciseRepetition" class="col-form-label">Exercise repetition:</label>'+
-    '<input type="number" class="form-control" id="UpdateExerciseRepetition" value="' + $(event.target).closest('.exerciseRep').text() + '"><label for="UpdateExerciseDescription" class="col-form-label">Exercise description:</label>' +
-    '<textarea name="UpdateExerciseDescription" rows="10" cols="45">' + $(event.target).closest('.exerciseDescription').text() + '</textarea><input type="hidden" id="UpdateExerciseId" value="' + $(event.target).closest('.editExercise').data('value') + 
+    '<input type="text" class="form-control" id="UpdateExerciseName" value="'+ $(event.target).closest("tr").find("td:eq(0)").text() + '"><label for="UpdateExerciseSerie" class="col-form-label">Exercise serie:</label>'+
+    '<input type="number" class="form-control" id="UpdateExerciseSerie" value="' + $(event.target).closest("tr").find("td:eq(1)").text() + '"><label for="UpdateExerciseRepetition" class="col-form-label">Exercise repetition:</label>'+
+    '<input type="number" class="form-control" id="UpdateExerciseRepetition" value="' + $(event.target).closest("tr").find("td:eq(2)").text() + '"><label for="UpdateExerciseDescription" class="col-form-label">Exercise description:</label>' +
+    '<textarea id="UpdateExerciseDescription" rows="10" cols="45">' + $(event.target).closest("tr").find("td:eq(3)").text() + '</textarea><input type="hidden" id="UpdateExerciseId" value="' + $(event.target).closest('.editExercise').val() + 
     '"><input type="hidden" id="UpdateExerciseProgramId" value="' + $(event.target).closest('.program').data('value') + '"></div></form>');
     $('#universalModalNo').text('Cancel');
     $('#universalModalYes').text('Update');
@@ -62,11 +61,11 @@ $('#program-list').on('click', '.editExercise', () => {
 
 $('#program-list').on('click', '.deleteExercise', () => {
     $('#universalModalTitle').text('Delete an exercise');
-    $('#universalModalBody').html('<input type="hidden" id="DeleteExerciseId" value="' + $(event.target).closest('.deleteExercise').data('value') + '"><p>Do you want to delete the exercise: '+
-    $(event.target).closest('.deleteExercise').data('value') + ' ?</p><input type="hidden" id="DeleteExerciseProgramId" value="' + $(event.target).closest('.program').data('value') + '">');
+    $('#universalModalBody').html('<input type="hidden" id="DeleteExerciseId" value="' + $(event.target).closest('.deleteExercise').val() + '"><p>Do you want to delete the exercise: '+
+    $(event.target).closest("tr").find("td:eq(0)").text() + ' ?</p><input type="hidden" id="DeleteExerciseProgramId" value="' + $(event.target).closest('.program').data('value') + '">');
     $('#universalModalNo').text('Cancel');
     $('#universalModalYes').text('Delete');
-    $('#universalModalYes').attr('value', 'DeleteExercise');    
+    $('#universalModalYes').attr('value', 'DeleteExercise');
     $('#universalModal').modal('show');
 });
 
@@ -91,7 +90,6 @@ $('#universalModalYes').click('button', () => {
 
         case 'DeleteProgram':
             let deleteProgramId = $('#DeleteProgramId').val();
-            console.log(deleteProgramId);
             ajaxRequest('DELETE', '../php/request.php/program/' + deleteProgramId, () => {
                 ajaxRequest('GET', '../php/request.php/program', showPrograms); 
             });
@@ -103,11 +101,11 @@ $('#universalModalYes').click('button', () => {
             let addExerciseSerie = $('#AddExerciseSerie').val();
             let addExerciseRepetition = $('#AddExerciseRepetition').val();
             let addExerciseDescription = $('#AddExerciseDescription').val();
-            console.log($('#AddExerciseDescription'));
             let addExerciseProgramId = $('#AddExerciseProgramId').val();
             let addExerciseData = 'name=' + addExerciseName + '&serie=' + addExerciseSerie + '&repetition=' + addExerciseRepetition 
             + '&description=' + addExerciseDescription + '&id_program=' + addExerciseProgramId;
             ajaxRequest('POST', '../php/request.php/exercise', () => {
+                $('#program'+addExerciseProgramId+'-list').html(''); // Clear the exercise list
                 ajaxRequest('GET', '../php/request.php/exercise', showExercises, 'id_program=' + addExerciseProgramId);
             } , addExerciseData);
             $('#universalModal').modal('hide');
@@ -123,6 +121,7 @@ $('#universalModalYes').click('button', () => {
             let updateExerciseData = 'name=' + updateExerciseName + '&serie=' + updateExerciseSerie + '&repetition=' + updateExerciseRepetition
             + '&description=' + updateExerciseDescription + '&id_program=' + updateExerciseProgramId;
             ajaxRequest('PUT', '../php/request.php/exercise/' + updateExerciseId, () => {
+                $('#program'+updateExerciseProgramId+'-list').html(''); // Clear the exercise list
                 ajaxRequest('GET', '../php/request.php/exercise', showExercises, 'id_program=' + updateExerciseProgramId);
             }, updateExerciseData);
             $('#universalModal').modal('hide');
@@ -131,9 +130,11 @@ $('#universalModalYes').click('button', () => {
         case 'DeleteExercise':
             let deleteExerciseId = $('#DeleteExerciseId').val();
             let deleteExerciseProgramId = $('#DeleteExerciseProgramId').val();
-            ajaxRequest('DELETE', '../php/request.php/exercise/' + deleteExerciseId, () => {    
+            ajaxRequest('DELETE', '../php/request.php/exercise/' + deleteExerciseId, () => { 
+                $('#program'+deleteExerciseProgramId+'-list').html(''); // Clear the exercise list   
                 ajaxRequest('GET', '../php/request.php/exercise', showExercises, 'id_program=' + deleteExerciseProgramId);
             });
+            $('#universalModal').modal('hide');
         default:
             break;
     }
