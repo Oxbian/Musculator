@@ -25,3 +25,21 @@ The project has a login system for each user, and each user can add exercises, r
 - Script to automatically install the project on your server
 - Docker image
 - Sync with mycroft AI, to get information and add new entries
+
+# How to contribute ?
+
+- Fork the project  
+- Create a new branch  
+- Make your changes  
+  
+You need to follow the HTML, CSS, JS, PHP, SQL coding style  
+```bash
+npm init -y
+npm install eslint eslint-config-airbnb-base eslint eslint-plugin-import htmlhint
+```
+And use the default vscode formatter for PHP, HTML, CSS, JS
+
+- Commit your changes
+- Push your changes
+- Create a pull request
+

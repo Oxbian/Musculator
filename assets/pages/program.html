@@ -1,99 +1,109 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="MUSCULATOR WEBSITE">
-    <title>PROGRAM | MUSCULATOR</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MUSCULATOR WEBSITE">
+  <title>PROGRAM | MUSCULATOR</title>
 
-    <!-- Style -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" crossorigin="anonymous">
-    <link href="../style/home.css" rel="stylesheet">
+  <!-- Style -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
+    crossorigin="anonymous">
+  <link href="../style/home.css" rel="stylesheet">
 
-    <!-- Script -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js" defer></script>
-    <script src="../js/ajax.js" defer></script>
-    <script src="../js/programCallback.js" defer></script>
-    <script src="../js/programModal.js" defer></script>
+  <!-- Script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+    crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js" defer></script>
+  <script src="../js/ajax.js" defer></script>
+  <script src="../js/programCallback.js" defer></script>
+  <script src="../js/programModal.js" defer></script>
 
 </head>
 
 <body class="bg-dark">
 
-    <!-- Header -->
-    <header class="navbar navbar-dark navbar-expand-lg bg-secondary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="../pictures/logo.png" alt="MUSCULATOR LOGO" width="auto" height="24">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>          
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-link" href="home.html">Home</a>
-                    <a class="nav-link active" aria-current="page" href="program.html">Program</a>
-                </div>
-            </div>
+  <!-- Header -->
+  <header class="navbar navbar-dark navbar-expand-lg bg-secondary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="../pictures/logo.png" alt="MUSCULATOR LOGO" width="auto" height="24">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link" href="home.html">Home</a>
+          <a class="nav-link active" aria-current="page" href="program.html">Program</a>
         </div>
-    </header>
+      </div>
+    </div>
+  </header>
 
-    <!-- Main -->
-    <main>
-        <!-- Errors -->
-        <section id="errors" class="mt-3 container alert alert-danger" style="display: none">
-        </section>
+  <!-- Main -->
+  <main>
+    <!-- Errors -->
+    <section id="errors" class="mt-3 container alert alert-danger" style="display: none">
+    </section>
 
-        <!-- Add program content & creation form -->
-        <section class="container">
-            <div class="row h-100">
-                <div class="col-8" id="program-list">
-                </div>
-                <!-- TODO: Add a modal for delete confirmation, exercise adding & program deletion-->
-                <div class="col-4 mt-3">
-                    <button type="button" class="btn btn-primary addProgram" id="addProgram">Add program</button>
-                </div>
+    <!-- Add program content & creation form -->
+    <section class="container">
+      <div class="row h-100">
+        <div class="col-8" id="program-list">
+        </div>
+        <!-- TODO: Add a modal for delete confirmation, exercise adding & program deletion-->
+        <div class="col-4 mt-3">
+          <button type="button" class="btn btn-primary addProgram" id="addProgram">Add program</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal for all the system -->
+    <section>
+      <!-- Modal which is updated in function of the caller button -->
+      <div class="modal fade" id="universalModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="universalModalTitle" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="universalModalTitle">Modal title</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-        </section>
 
-        <!-- Modal for all the system -->
-        <section>
-            <!-- Modal which is updated in function of the caller button -->
-            <div class="modal fade" id="universalModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="universalModalTitle" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="universalModalTitle">Modal title</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-
-                        <div class="modal-body" id="universalModalBody">
-                            <form>
-                                <div class="mb-3">
-                                    <label for="AddExerciseName" class="col-form-label">Exercise name:</label>
-                                    <input type="text" class="form-control" id="AddExerciseName">
-                                    <label for="AddExerciseSerie" class="col-form-label">Exercise serie:</label>
-                                    <input type="number" class="form-control" id="AddExerciseSerie">
-                                    <label for="AddExerciseRepetition" class="col-form-label">Exercise repetition:</label>
-                                    <input type="number" class="form-control" id="AddExerciseRepetition">
-                                    <label for="AddExerciseDescription" class="col-form-label">Exercise description:</label>
-                                    <textarea name="AddExerciseDescription" rows="10" cols="45"></textarea>
-                                    <input type="hidden" id="AddExerciseProgramId" value="1">
-                                </div>
-                            </form>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="universalModalNo">No</button>
-                            <button type="button" class="btn btn-primary" id="universalModalYes">Yes</button>
-                        </div>
-                    </div>
+            <div class="modal-body" id="universalModalBody">
+              <form>
+                <div class="mb-3">
+                  <label for="AddExerciseName" class="col-form-label">Exercise name:</label>
+                  <input type="text" class="form-control" id="AddExerciseName">
+                  <label for="AddExerciseSerie" class="col-form-label">Exercise serie:</label>
+                  <input type="number" class="form-control" id="AddExerciseSerie">
+                  <label for="AddExerciseRepetition" class="col-form-label">Exercise
+                    repetition:</label>
+                  <input type="number" class="form-control" id="AddExerciseRepetition">
+                  <label for="AddExerciseDescription" class="col-form-label">Exercise
+                    description:</label>
+                  <textarea name="AddExerciseDescription" rows="10" cols="45"></textarea>
+                  <input type="hidden" id="AddExerciseProgramId" value="1">
                 </div>
+              </form>
             </div>
-        </section>
-    </main>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="universalModalNo">No</button>
+              <button type="button" class="btn btn-primary" id="universalModalYes">Yes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 </body>
+
 </html>
