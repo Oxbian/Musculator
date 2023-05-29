@@ -1,4 +1,6 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
+
 // Display an error message accordingly to an error code
 function httpErrors(errorCode) {
   const messages = {

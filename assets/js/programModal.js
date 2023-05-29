@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+
 $('#addProgram').on('click', () => {
   $('#universalModalTitle').text('Add a program');
   $('#universalModalBody').html('<form><div class="mb-3"><label for="AddProgramName" class="col-form-label">Program name:</label>'
@@ -9,34 +10,34 @@ $('#addProgram').on('click', () => {
   $('#universalModal').modal('show');
 });
 
-$('#program-list').on('click', '.editProgram', () => {
+$('#program-list').on('click', '.editProgram', (e) => {
   $('#universalModalTitle').text('Edit a program');
   $('#universalModalBody').html(`<form><div class="mb-3"><label for="UpdateProgramName" class="col-form-label">Program name:</label>
-  <input type="text" class="form-control" id="UpdateProgramName" value="${$(event.target).closest('.program').find('h1').text()}">
-  <input type="hidden" id="UpdateProgramId" value="${$(event.target).closest('.program').data('value')}"></div></form>`);
+  <input type="text" class="form-control" id="UpdateProgramName" value="${$(e.target).closest('.program').find('h1').text()}">
+  <input type="hidden" id="UpdateProgramId" value="${$(e.target).closest('.program').data('value')}"></div></form>`);
   $('#universalModalNo').text('Cancel');
   $('#universalModalYes').text('Update');
   $('#universalModalYes').attr('value', 'UpdateProgram');
   $('#universalModal').modal('show');
 });
 
-$('#program-list').on('click', '.deleteProgram', () => {
+$('#program-list').on('click', '.deleteProgram', (e) => {
   $('#universalModalTitle').text('Delete a program');
-  $('#universalModalBody').html(`<input type="hidden" id="DeleteProgramId" value="${$(event.target).closest('.program').data('value')}"><p>Do you want to delete the program:
-  ${$(event.target).closest('.program').find('h1').text()} ?</p>`);
+  $('#universalModalBody').html(`<input type="hidden" id="DeleteProgramId" value="${$(e.target).closest('.program').data('value')}"><p>Do you want to delete the program:
+  ${$(e.target).closest('.program').find('h1').text()} ?</p>`);
   $('#universalModalNo').text('Cancel');
   $('#universalModalYes').text('Delete');
   $('#universalModalYes').attr('value', 'DeleteProgram');
   $('#universalModal').modal('show');
 });
 
-$('#program-list').on('click', '.addExercise', () => {
+$('#program-list').on('click', '.addExercise', (e) => {
   $('#universalModalTitle').text('Add an exercise');
   $('#universalModalBody').html(`<form><div class="mb-3"><label for="AddExerciseName" class="col-form-label">Exercise name:</label>
     <input type="text" class="form-control" id="AddExerciseName"><label for="AddExerciseSerie" class="col-form-label">Exercise serie:</label>
     <input type="number" class="form-control" id="AddExerciseSerie"><label for="AddExerciseRepetition" class="col-form-label">Exercise repetition:</label>
     <input type="number" class="form-control" id="AddExerciseRepetition"><label for="AddExerciseDescription" class="col-form-label">Exercise description:</label>
-    <textarea id="AddExerciseDescription" rows="10" cols="45"></textarea><input type="hidden" id="AddExerciseProgramId" value="${$(event.target).closest('.program').data('value')}">
+    <textarea id="AddExerciseDescription" rows="10" cols="45"></textarea><input type="hidden" id="AddExerciseProgramId" value="${$(e.target).closest('.program').data('value')}">
     </div></form>`);
   $('#universalModalNo').text('Cancel');
   $('#universalModalYes').text('Add');
@@ -44,27 +45,27 @@ $('#program-list').on('click', '.addExercise', () => {
   $('#universalModal').modal('show');
 });
 
-$('#program-list').on('click', '.editExercise', () => {
+$('#program-list').on('click', '.editExercise', (e) => {
   $('#universalModalTitle').text('Update an exercise');
   $('#universalModalBody').html(`<form><div class="mb-3"><label for="UpdateExerciseName" class="col-form-label">Exercise name:</label>
-    <input type="text" class="form-control" id="UpdateExerciseName" value="${$(event.target).closest('tr').find('td:eq(0)').text()}">
+    <input type="text" class="form-control" id="UpdateExerciseName" value="${$(e.target).closest('tr').find('td:eq(0)').text()}">
     <label for="UpdateExerciseSerie" class="col-form-label">Exercise serie:</label><input type="number" class="form-control" id="UpdateExerciseSerie" value="
-    ${$(event.target).closest('tr').find('td:eq(1)').text()}"><label for="UpdateExerciseRepetition" class="col-form-label">Exercise repetition:</label>
-    <input type="number" class="form-control" id="UpdateExerciseRepetition" value="${$(event.target).closest('tr').find('td:eq(2)').text()}">
+    ${$(e.target).closest('tr').find('td:eq(1)').text()}"><label for="UpdateExerciseRepetition" class="col-form-label">Exercise repetition:</label>
+    <input type="number" class="form-control" id="UpdateExerciseRepetition" value="${$(e.target).closest('tr').find('td:eq(2)').text()}">
     <label for="UpdateExerciseDescription" class="col-form-label">Exercise description:</label>
-    <textarea id="UpdateExerciseDescription" rows="10" cols="45">${$(event.target).closest('tr').find('td:eq(3)').text()}
-    </textarea><input type="hidden" id="UpdateExerciseId" value="${$(event.target).closest('.editExercise').val()}">
-    <input type="hidden" id="UpdateExerciseProgramId" value="${$(event.target).closest('.program').data('value')}"></div></form>`);
+    <textarea id="UpdateExerciseDescription" rows="10" cols="45">${$(e.target).closest('tr').find('td:eq(3)').text()}
+    </textarea><input type="hidden" id="UpdateExerciseId" value="${$(e.target).closest('.editExercise').val()}">
+    <input type="hidden" id="UpdateExerciseProgramId" value="${$(e.target).closest('.program').data('value')}"></div></form>`);
   $('#universalModalNo').text('Cancel');
   $('#universalModalYes').text('Update');
   $('#universalModalYes').attr('value', 'UpdateExercise');
   $('#universalModal').modal('show');
 });
 
-$('#program-list').on('click', '.deleteExercise', () => {
+$('#program-list').on('click', '.deleteExercise', (e) => {
   $('#universalModalTitle').text('Delete an exercise');
-  $('#universalModalBody').html(`<input type="hidden" id="DeleteExerciseId" value="${$(event.target).closest('.deleteExercise').val()}"><p>Do you want to delete the exercise: 
-  ${$(event.target).closest('tr').find('td:eq(0)').text()} ?</p><input type="hidden" id="DeleteExerciseProgramId" value="${$(event.target).closest('.program').data('value')}">`);
+  $('#universalModalBody').html(`<input type="hidden" id="DeleteExerciseId" value="${$(e.target).closest('.deleteExercise').val()}"><p>Do you want to delete the exercise: 
+  ${$(e.target).closest('tr').find('td:eq(0)').text()} ?</p><input type="hidden" id="DeleteExerciseProgramId" value="${$(e.target).closest('.program').data('value')}">`);
   $('#universalModalNo').text('Cancel');
   $('#universalModalYes').text('Delete');
   $('#universalModalYes').attr('value', 'DeleteExercise');

@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+
 function showExercises(data) {
   if (data.length === 0 || data == null || data === false) {
     return;
